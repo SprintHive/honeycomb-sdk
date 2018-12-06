@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import {compose, setDisplayName, withProps, setPropTypes} from "recompose";
 
 export const loadPropFromUrl = propName => compose(
-  setDisplayName("getLeadIdFromUrl"),
+  setDisplayName("loadPropFromUrl"),
   setPropTypes({
     match: PropTypes.object.isRequired
   }),

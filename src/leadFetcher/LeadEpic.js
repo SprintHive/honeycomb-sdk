@@ -28,7 +28,7 @@ export const propertyChanged = (action$, store, deps) => {
   return action$.ofType("PROPERTY_CHANGED")
     .flatMap(action => {
       console.log("propertyChanged", action.payload);
-      const {entityId, entityName, propertyName, innerPropertyName, endpoint, newValue, authToken} = action.payload;
+      const {entityId, entityName, propertyName, innerPropertyName, endpoint, newValue, authToken, productId} = action.payload;
       const headers = honeycombHeaders || {};
       headers['Authorization'] = `Bearer ${authToken}`;
       let data = {[propertyName]: newValue};
@@ -46,7 +46,7 @@ export const propertyChanged = (action$, store, deps) => {
       }
 
       return Observable.fromPromise(
-        axios.post(`${endpoint}/${entityName}/${entityId}/${propertyName}`, data, {headers}))
+        axios.patch(`${endpoint}/${entityName}/${entityId}/${productId}`, data, {headers}))
         .mergeMap(() => Observable.empty())
         .catch((e) => {
           const message = `Something went wrong trying to update the ${propertyName}`;

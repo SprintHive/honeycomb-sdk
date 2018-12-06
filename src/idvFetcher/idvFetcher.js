@@ -13,19 +13,18 @@ import {entityFetcher} from "entity-fetcher";
 export const idvFetcher = compose(
   setDisplayName("IdvFetcher"),
   setPropTypes({
-    idvId: PropTypes.string,
+    identityVerificationId: PropTypes.string,
     endpoint: PropTypes.string.isRequired,
-    headers: PropTypes.object
+    authToken: PropTypes.string
   }),
   withProps(props => {
-    const {idvId, endpoint, headers, children} = props;
+    const {identityVerificationId, endpoint, authToken} = props;
     return {
-      entityKey: "idv",
-      entityId: idvId,
+      entityKey: "identityVerification",
+      entityId: identityVerificationId,
       idField: "identityVerificationId",
       endpoint,
-      headers,
-      children
+      authToken
     }
   }),
   entityFetcher
